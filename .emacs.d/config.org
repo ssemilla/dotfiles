@@ -57,6 +57,43 @@
     :ensure t)
 #+END_SRC
 
+*** company
+    Auto complete package.
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :bind (:map company-active-map
+		("M-n" . nil)
+		("M-p" . nil)
+		("C-n" . #'company-select-next)
+		("C-p" . #'company-select-previous)
+		("SPACE" . #'company-abort))
+    :config
+    (setq company-idle-delay 0)
+    (setq company-minimum-prefix 3)
+    (global-company-mode))
+  (global-set-key (kbd "C-c .") 'company-complete)
+#+END_SRC
+
+** Programming
+   Packages used for programming
+
+*** Go
+    Golang
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode
+    :ensure t)
+  (use-package company-go
+    :ensure t
+    :after (company))
+  (add-hook 'go-mode-hook (lambda ()
+			    (set (make-local-variable 'company-backends) '(company-go))
+			    (company-mode)))
+  (use-package go-eldoc
+    :ensure t)
+  (add-hook 'go-mode-hook 'go-eldoc-setup)
+#+END_SRC
+
 * Looks
 
 *** Annoying things
@@ -70,8 +107,9 @@
 *** Simplify
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode 0)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0)
+  (when window-system
+    (tool-bar-mode 0)
+    (scroll-bar-mode 0))
 #+END_SRC
 
 *** Misc
