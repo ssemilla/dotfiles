@@ -1,0 +1,81 @@
+* Head
+  This =.org= file will be translated to a =.el= file by =org-babel-load-file=.
+  It is heavily inpired by [[https://www.youtube.com/channel/UCDEtZ7AKmwS0_GNJog01D2g][Uncle Dave]].
+
+** COMMENT init.el  
+   =init.el= file only contains initializing =package= and then loading =config.org=
+
+*** Initialize =package=
+    Add MELPA
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives
+	       '("melpa" . "http://melpa.org/packages/"))
+  (package-initialize)
+#+END_SRC
+
+*** Load =config.org=
+    This line loads =config.org= by extracting the =emacs-lisp= snippets and compiling it to =config.el=.
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
+#+END_SRC
+* Packages
+  These are the packages that I use. I will update them when needed.
+** use-package
+   This simplifies installing packages. See the preceding snippets for usage.
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+#+END_SRC
+
+** which-key
+   This gives hints on the possible keys because I'm really forgetful.
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init (which-key-mode))
+#+END_SRC
+
+** solarized-theme
+   I'm used to this theme, it looks like a blackboard.
+#+BEGIN_SRC emacs-lisp
+  (use-package solarized-theme
+    :ensure t
+    :init (load-theme 'solarized-dark t))
+#+END_SRC
+
+* Looks
+
+*** Annoying things
+#+BEGIN_SRC emacs-lisp
+  ;; Disable the bell sound
+  (setq ring-bell-function 'ignore)
+  ;; Disable startup screen
+  (setq inhibit-startup-screen t)
+#+END_SRC
+
+*** Simplify
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+#+END_SRC
+
+*** Misc
+    
+#+BEGIN_SRC emacs-lisp
+  ;; Always highlight current line.
+  (global-hl-line-mode t)
+
+  ;; Prettify some characters. I might actually remove this.
+  (global-prettify-symbols-mode t)
+#+END_SRC
+
+*** Backup files
+    Store backup files in a directory. Note that I do not have a function to create the directory =~/.emacs.d/emacs-backup=.
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
+#+END_SRC
+
