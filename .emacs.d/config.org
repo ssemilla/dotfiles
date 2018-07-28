@@ -1,8 +1,8 @@
-* Head
+* Intro
   This =.org= file will be translated to a =.el= file by =org-babel-load-file=.
   It is heavily inpired by [[https://www.youtube.com/channel/UCDEtZ7AKmwS0_GNJog01D2g][Uncle Dave]].
 
-** init.el  
+* My =init.el= file
    =init.el= file only contains initializing =package= and then loading =config.org=
    
 *** Initialize =package=
@@ -21,9 +21,12 @@
   (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
 #+END_SRC
 
+* Actual contents of =config.org=
+  From this point on, the code snippets will be parsed into =config.el=
+
 * Packages
   These are the packages that I use. I will update them when needed.
-** use-package
+*** use-package
    This simplifies installing packages. See the preceding snippets for usage.
 #+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'use-package)
@@ -31,7 +34,7 @@
     (package-install 'use-package))
 #+END_SRC
 
-** which-key
+*** which-key
    This gives hints on the possible keys because I'm really forgetful.
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
@@ -39,7 +42,7 @@
     :init (which-key-mode))
 #+END_SRC
 
-** solarized-theme
+*** solarized-theme
    I'm used to this theme, it looks like a blackboard.
 #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
@@ -47,7 +50,7 @@
     :init (load-theme 'solarized-dark t))
 #+END_SRC
 
-** modes
+*** modes
    Additional modes
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
