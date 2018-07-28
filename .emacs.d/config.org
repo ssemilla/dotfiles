@@ -2,12 +2,12 @@
   This =.org= file will be translated to a =.el= file by =org-babel-load-file=.
   It is heavily inpired by [[https://www.youtube.com/channel/UCDEtZ7AKmwS0_GNJog01D2g][Uncle Dave]].
 
-** COMMENT init.el  
+** init.el  
    =init.el= file only contains initializing =package= and then loading =config.org=
-
+   
 *** Initialize =package=
     Add MELPA
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (require 'package)
   (setq package-enable-at-startup nil)
   (add-to-list 'package-archives
@@ -17,9 +17,10 @@
 
 *** Load =config.org=
     This line loads =config.org= by extracting the =emacs-lisp= snippets and compiling it to =config.el=.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
 #+END_SRC
+
 * Packages
   These are the packages that I use. I will update them when needed.
 ** use-package
@@ -44,6 +45,13 @@
   (use-package solarized-theme
     :ensure t
     :init (load-theme 'solarized-dark t))
+#+END_SRC
+
+** modes
+   Additional modes
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
 #+END_SRC
 
 * Looks
