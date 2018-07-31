@@ -69,10 +69,10 @@
 		("C-p" . #'company-select-previous)
 		("SPACE" . #'company-abort))
     :config
-    (setq company-idle-delay 0)
+    (setq company-idle-delay 3)
     (setq company-minimum-prefix 3)
     (global-company-mode))
-  (global-set-key (kbd "C-c .") 'company-complete)
+  (global-set-key (kbd "C-.") 'company-complete)
 #+END_SRC
 
 ** Programming
@@ -86,15 +86,24 @@
     Golang
 #+BEGIN_SRC emacs-lisp
   (use-package go-mode
-    :ensure t)
+	:ensure t)
   (use-package company-go
-    :ensure t
-    :after (company))
+	:ensure t
+	:after (company))
+  (use-package go-guru
+	:ensure t)
   (add-hook 'go-mode-hook (lambda ()
-			    (set (make-local-variable 'company-backends) '(company-go))
-			    (company-mode)))
+				(set (make-local-variable 'company-backends) '(company-go))
+				(company-mode)
+				(go-guru-hl-identifier-mode)))
+#+END_SRC
+
+**** Unused Packages
+
+	 These are the packages that I'm not using at the moment.
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package go-eldoc
-    :ensure t)
+	:ensure t)
   (add-hook 'go-mode-hook 'go-eldoc-setup)
 #+END_SRC
 
@@ -131,4 +140,6 @@
 #+BEGIN_SRC emacs-lisp
   (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
 #+END_SRC
+
+
 
