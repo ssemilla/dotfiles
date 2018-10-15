@@ -7,5 +7,5 @@ tldr;
 
 ```bash
 alias dotgit="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
-git clone --bare https://github.com/ssemilla/dotfile $HOME/dotfiles
+git clone --bare https://github.com/ssemilla/dotfiles $HOME/dotfiles
 ```
